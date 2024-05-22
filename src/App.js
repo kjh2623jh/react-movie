@@ -1,33 +1,21 @@
-import { useEffect, useState } from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Home from "./routes/Home";
+import Detail from "./routes/Detail";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Home />,
+    // errorElement: <ErrorPage />,
+  },
+  {
+    path: "/movie",
+    element: <Detail />,
+  },
+]);
 
 function App() {
-  const [loading, setLoading] = useState(true);
-  const [coins, setCoins] = useState([]);
-  useEffect(() => {
-    fetch("https://api.coinpaprika.com/v1/tickers")
-      .then((response) => response.json())
-      .then((json) => {
-        setCoins(json);
-        setLoading(false);
-      });
-  }, []);
-
-  return (
-    <div>
-      <h1>The Coins {loading ? "" : `(${coins.length})`}</h1>
-      {loading ? (
-        <strong>Loading..</strong>
-      ) : (
-        <select>
-          {coins.map((coin /*, index */) => (
-            <option key={coin.id}>
-              {coin.name} ({coin.symbol}): {coin.quotes.USD.price} USD
-            </option>
-          ))}
-        </select>
-      )}
-    </div>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
