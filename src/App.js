@@ -2,17 +2,20 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./routes/Home";
 import Detail from "./routes/Detail";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Home />,
-    // errorElement: <ErrorPage />,
-  },
-  {
-    path: "/movie/:id",
-    element: <Detail />,
-  },
-]);
+const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      element: <Home />,
+      // errorElement: <ErrorPage />,
+    },
+    {
+      path: "/movie/:id",
+      element: <Detail />,
+    },
+  ],
+  { basename: process.env.PUBLIC_URL }
+);
 
 function App() {
   return <RouterProvider router={router} />;
